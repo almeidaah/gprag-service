@@ -1,0 +1,6 @@
+{
+  "name": "GPRAG-Service",
+  "description": "GPRAG-Service Spring-boot : Client/Job/Alerts",
+  "image": "heroku/java",
+  "addons": [ "heroku-postgresql" ]
+}
