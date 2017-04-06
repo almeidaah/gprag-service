@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("gprag/v1/client")
-public class ClientController {
+@RequestMapping("gprag/v1/job")
+public class JobController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public String insert(){
-		return "Cliente Inserido";
+		return "JOB Inserido";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public String get(){
-		return "Cliente Encontrado";
+		return "JOB Encontrado";
 	}
 }
