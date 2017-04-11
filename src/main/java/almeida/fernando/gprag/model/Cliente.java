@@ -1,6 +1,7 @@
 package almeida.fernando.gprag.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +18,8 @@ public class Cliente {
 	private Date periodoNecessidade;
 	private Boolean status;
 	private Long telefone;
+	
+	private List<Trabalho> trabalhos;
 	
 	public String getNome() {
 		return nome;
@@ -59,6 +62,12 @@ public class Cliente {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public List<Trabalho> getTrabalhos() {
+		return trabalhos;
+	}
+	public void setTrabalhos(List<Trabalho> trabalhos) {
+		this.trabalhos = trabalhos;
 	}
 
 	

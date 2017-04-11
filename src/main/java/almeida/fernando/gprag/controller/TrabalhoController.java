@@ -1,6 +1,5 @@
 package almeida.fernando.gprag.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +12,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import almeida.fernando.gprag.model.Cliente;
-import almeida.fernando.gprag.service.ClienteService;
-import almeida.fernando.gprag.util.ClienteUtils;
+import almeida.fernando.gprag.model.Trabalho;
+import almeida.fernando.gprag.service.TrabalhoService;
+import almeida.fernando.gprag.util.TrabalhoUtils;
 
 @Controller
-@RequestMapping("gprag/v1/clients")
+@RequestMapping("gprag/v1/job")
 @CrossOrigin(origins="*")
-public class ClienteController {
+public class TrabalhoController {
 
-	@Autowired
-	private ClienteService clienteService;
+	@Autowired 
+	private TrabalhoService trabalhoService;
 	
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Cliente> insert(@RequestParam Map<String, String> parameters){
-		
-		Cliente cliente = ClienteUtils.popularCliente(parameters);
-		clienteService.inserir(cliente);
-		
-		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+	public ResponseEntity<Trabalho> insert(@RequestParam Map<String, String> parameters){
+		Trabalho trabalho = TrabalhoUtils.popularTrabalho(parameters);
+		trabalhoService.inserir(trabalho);
+		return new ResponseEntity<Trabalho>(trabalho, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
-	public List<Cliente> get(){
-		return clienteService.findAll();
+	public String get(){
+		return "JOB Encontrado";
 	}
 }
