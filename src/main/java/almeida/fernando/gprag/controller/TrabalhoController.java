@@ -1,5 +1,6 @@
 package almeida.fernando.gprag.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,12 +39,12 @@ public class TrabalhoController {
 		return new ResponseEntity<Trabalho>(trabalho, HttpStatus.OK);
 	}
 	/**
-	 * Buscar um trabalho específico
+	 * Busca a lista de trabalhos realizados para cada cliente
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/{idCliente}", method=RequestMethod.GET)
 	@ResponseBody
-	public String get(){
-		return "JOB Encontrado";
+	public List<Trabalho> findByClientId(@PathVariable String idCliente){
+		return trabalhoService.findByIdCliente(idCliente);
 	}
 }

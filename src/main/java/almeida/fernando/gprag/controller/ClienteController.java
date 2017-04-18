@@ -33,16 +33,16 @@ public class ClienteController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Cliente> insert(@RequestParam Map<String, String> parameters){
+	public ResponseEntity<Cliente> save(@RequestParam Map<String, String> parameters){
 		
 		Cliente cliente = ClienteUtils.popularCliente(parameters);
-		clienteService.inserir(cliente);
+		clienteService.saveOrUpdate(cliente);
 		
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 	
 	/**
-	 * Buscar todos os clientes
+	 * Buscar todos os clientes(Ordernados por nome)
 	 * @return List<Cliente> clientes cadastrados
 	 */
 	@RequestMapping(method=RequestMethod.GET)

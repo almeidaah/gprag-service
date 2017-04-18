@@ -9,6 +9,7 @@ import almeida.fernando.gprag.model.Cliente;
 
 public class ClienteUtils {
 
+	private static final String ID = "id";
 	private static final String NOME = "nome";
 	private static final String ENDERECO = "endereco";
 	private static final String TELEFONE = "telefone";
@@ -19,6 +20,7 @@ public class ClienteUtils {
 	public static Cliente popularCliente(Map<String, String> parameters) {
 	
 		Cliente c = new Cliente();
+		c.setId(parameters.get(ClienteUtils.ID));
 		c.setNome(parameters.get(ClienteUtils.NOME));
 		c.setEndereco(parameters.get(ClienteUtils.ENDERECO));
 		c.setEmail(parameters.get(ClienteUtils.EMAIL));
