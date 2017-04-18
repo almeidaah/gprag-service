@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,11 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	/**
+	 * Inserir novo cliente
+	 * @param parameters
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Cliente> insert(@RequestParam Map<String, String> parameters){
@@ -35,9 +41,31 @@ public class ClienteController {
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 	
+	/**
+	 * Buscar todos os clientes
+	 * @return List<Cliente> clientes cadastrados
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public List<Cliente> get(){
 		return clienteService.findAll();
+	}
+	
+	/**
+	 * Busca cliente por nome (Case Insensitive) / Busca por like Ex "Client" ou "lient"
+	 * @param nmCliente
+	 * @return
+	 */
+	@RequestMapping(value="/{nmCliente}", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Cliente> findByName(@PathVariable String nmCliente){
+		return clienteService.findByNome(nmCliente);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<String> delete(@PathVariable String id){
+		clienteService.delete(id);
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 }

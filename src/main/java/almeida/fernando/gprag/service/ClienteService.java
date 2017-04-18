@@ -13,16 +13,26 @@ import almeida.fernando.gprag.repository.ClienteRepository;
 public class ClienteService{
 
 	@Autowired
-	private ClienteRepository clientRepository;
+	private ClienteRepository clienteRepository;
 
 	@Transactional
 	public void inserir(Cliente cliente) {
-		clientRepository.insert(cliente);
+		clienteRepository.insert(cliente);
 	}
 
 	@Transactional
 	public List<Cliente> findAll() {
-		return clientRepository.findAll();
+		return clienteRepository.findAll();
+	}
+
+	@Transactional
+	public List<Cliente> findByNome(String nmCliente) {
+		return clienteRepository.findByNome(nmCliente);
+	}
+
+	@Transactional
+	public void delete(String id) {
+		clienteRepository.delete(id);
 	}
 	
 }

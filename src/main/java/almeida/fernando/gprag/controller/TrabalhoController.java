@@ -24,6 +24,11 @@ public class TrabalhoController {
 	@Autowired 
 	private TrabalhoService trabalhoService;
 	
+	/**
+	 * Inserir novo trabalho
+	 * @param parameters
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Trabalho> insert(@RequestParam Map<String, String> parameters){
@@ -31,7 +36,10 @@ public class TrabalhoController {
 		trabalhoService.inserir(trabalho);
 		return new ResponseEntity<Trabalho>(trabalho, HttpStatus.OK);
 	}
-	
+	/**
+	 * Buscar um trabalho específico
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public String get(){
