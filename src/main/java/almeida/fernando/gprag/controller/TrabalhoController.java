@@ -42,9 +42,21 @@ public class TrabalhoController {
 	 * Busca a lista de trabalhos realizados para cada cliente
 	 * @return
 	 */
-	@RequestMapping(value="/{idCliente}", method=RequestMethod.GET)
+	@RequestMapping(value="/client/{idCliente}", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Trabalho> findByClientId(@PathVariable String idCliente){
 		return trabalhoService.findByIdCliente(idCliente);
+	}
+	
+	/**
+	 * Remove um trabalho
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<String> delete(@PathVariable String id){
+		trabalhoService.delete(id);
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 }

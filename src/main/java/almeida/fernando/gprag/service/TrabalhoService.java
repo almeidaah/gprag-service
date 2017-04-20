@@ -24,6 +24,11 @@ public class TrabalhoService {
 	public List<Trabalho> findByIdCliente(String idCliente) {
 		return trabalhoRepository.findByIdCliente(idCliente);
 	}
+
+	@Transactional
+	public void delete(String id) {
+		trabalhoRepository.delete(id);
+	}
 	
 	
 
