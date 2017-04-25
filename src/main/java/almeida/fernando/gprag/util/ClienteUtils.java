@@ -23,7 +23,11 @@ public class ClienteUtils {
 		c.setId(parameters.get(ClienteUtils.ID));
 		c.setNome(parameters.get(ClienteUtils.NOME));
 		c.setEndereco(parameters.get(ClienteUtils.ENDERECO));
-		c.setEmail(parameters.get(ClienteUtils.EMAIL));
+		
+		String email = parameters.get(ClienteUtils.EMAIL);
+		if(!StringUtils.isEmpty(email)){
+			c.setEmail(email.toLowerCase());
+		}
 		
 		String telefone = parameters.get(ClienteUtils.TELEFONE);
 		if(!StringUtils.isEmpty(telefone)){

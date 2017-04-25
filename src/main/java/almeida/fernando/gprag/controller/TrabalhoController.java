@@ -1,5 +1,6 @@
 package almeida.fernando.gprag.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,13 +31,15 @@ public class TrabalhoController {
 	 * Inserir novo trabalho
 	 * @param parameters
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Trabalho> insert(@RequestParam Map<String, String> parameters){
+	public ResponseEntity<Trabalho> insert(@RequestParam Map<String, String> parameters) throws IOException{
 		Trabalho trabalho = TrabalhoUtils.popularTrabalho(parameters);
 		trabalhoService.inserir(trabalho);
 		return new ResponseEntity<Trabalho>(trabalho, HttpStatus.OK);
+
 	}
 	/**
 	 * Busca a lista de trabalhos realizados para cada cliente

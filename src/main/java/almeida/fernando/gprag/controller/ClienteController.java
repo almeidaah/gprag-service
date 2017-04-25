@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import almeida.fernando.gprag.model.Cliente;
+import almeida.fernando.gprag.model.Trabalho;
 import almeida.fernando.gprag.service.ClienteService;
+import almeida.fernando.gprag.service.TrabalhoService;
 import almeida.fernando.gprag.util.ClienteUtils;
 
 @Controller
@@ -25,6 +27,9 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private TrabalhoService trabalhoService;
 	
 	/**
 	 * Inserir novo cliente
@@ -62,9 +67,19 @@ public class ClienteController {
 		return clienteService.findByNome(nmCliente);
 	}
 	
+	/**
+	 * Deleta um cliente(e todos os trabalhos associados
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<String> delete(@PathVariable String id){
+		
+		//Deleta os trabalhos antes de deletar o cliente
+		List<Trabalho> trabalhos = trabalhoService.findByIdCliente(id);
+		trabalhos.forEach(t -> trabalhoService.delete(t.getId()));
+			
 		clienteService.delete(id);
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}

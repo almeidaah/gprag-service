@@ -20,7 +20,7 @@ public class Trabalho {
 	private String aplicador;
 	private Date periodoNecessidade;
 
-	private Map<String, Boolean> tipoTrabalho;
+	private String tipoTrabalho;
 
 	public String getId() {
 		return id;
@@ -30,11 +30,11 @@ public class Trabalho {
 		this.id = id;
 	}
 
-	public Map<String, Boolean> getTipoTrabalho() {
+	public String getTipoTrabalho() {
 		return tipoTrabalho;
 	}
 
-	public void setTipoTrabalho(Map<String, Boolean> tipoTrabalho) {
+	public void setTipoTrabalho(String tipoTrabalho) {
 		this.tipoTrabalho = tipoTrabalho;
 	}
 

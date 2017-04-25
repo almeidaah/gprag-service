@@ -1,5 +1,6 @@
 package almeida.fernando.gprag.util;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class TrabalhoUtils {
 	private static final String REPRESENTANTE = "representante";
 	private static final String APLICADOR = "aplicador";
 	
-	public static Trabalho popularTrabalho(Map<String, String> parameters){
+	public static Trabalho popularTrabalho(Map<String, String> parameters) throws IOException{
 
 		Trabalho t = new Trabalho();
 		t.setIdCliente(parameters.get(TrabalhoUtils.ID_CLIENTE));
@@ -25,12 +26,9 @@ public class TrabalhoUtils {
 		Long periodoNecessidade = Long.parseLong(parameters.get(TrabalhoUtils.PERIODO_NECESSIDADE));
 		
 		t.setPeriodoNecessidade(new Date(periodoNecessidade));
-		//TODO
 		
-		String tipoTrabalhoRealizado = (String)parameters.get(TrabalhoUtils.TIPO_TRABALHO);
-		//t.setTipoTrabalho((Map<String, Boolean>)parameters.g(TrabalhoUtils.TIPO_TRABALHO));
-		
-		//{"text":"DTT","enabled":true}
+		String tipoTrabalho = (String)parameters.get(TrabalhoUtils.TIPO_TRABALHO);
+		t.setTipoTrabalho(tipoTrabalho);
 		
 		return t;
 	}
