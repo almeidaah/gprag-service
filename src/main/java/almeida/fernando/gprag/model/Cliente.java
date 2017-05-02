@@ -15,7 +15,7 @@ public class Cliente {
 	private String nome;
 	private String email;
 	private String endereco;
-	private Date periodoNecessidade;
+	private Long periodoNecessidade;
 	private Boolean status;
 	private Long telefone;
 	
@@ -39,10 +39,10 @@ public class Cliente {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public Date getPeriodoNecessidade() {
+	public Long getPeriodoNecessidade() {
 		return periodoNecessidade;
 	}
-	public void setPeriodoNecessidade(Date periodoNecessidade) {
+	public void setPeriodoNecessidade(Long periodoNecessidade) {
 		this.periodoNecessidade = periodoNecessidade;
 	}
 	public Boolean getStatus() {

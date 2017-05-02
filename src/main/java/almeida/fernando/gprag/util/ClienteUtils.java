@@ -37,9 +37,7 @@ public class ClienteUtils {
 		Boolean status = Boolean.valueOf(parameters.get(ClienteUtils.STATUS));
 		c.setStatus(status);
 		
-		long periodoNecessidadeParam = Long.parseLong(parameters.get(ClienteUtils.PERIODO_NECESSIDADE));
-		Date periodoNecessidade = new Date(periodoNecessidadeParam);
-		c.setPeriodoNecessidade(periodoNecessidade);
+		c.setPeriodoNecessidade(Long.parseLong(parameters.get(ClienteUtils.PERIODO_NECESSIDADE)));
 		
 		return c;
 	}

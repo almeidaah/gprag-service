@@ -1,5 +1,7 @@
 package almeida.fernando.gprag.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,16 @@ public class ClienteService{
 	@Transactional
 	public void delete(String id) {
 		clienteRepository.delete(id);
+	}
+
+	@Transactional
+	public List<Cliente> findClientsToExpire() {
+		int noOfDays = 7; 
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());            
+		calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+		
+		return clienteRepository.findByPeriodoNecessidade(new Date().getTime(), calendar.getTime().getTime());
 	}
 	
 }

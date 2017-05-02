@@ -83,4 +83,6 @@ public class ClienteController {
 		clienteService.delete(id);
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
+	
+	
 }
