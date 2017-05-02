@@ -1,6 +1,5 @@
 package almeida.fernando.gprag.model;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
