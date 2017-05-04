@@ -53,5 +53,10 @@ public class ClienteService{
 		
 		return clienteRepository.findByPeriodoNecessidade(new Date().getTime(), calendar.getTime().getTime());
 	}
+
+	@Transactional
+	public List<Cliente> findExpiredClients() {
+		return clienteRepository.findExpiredClients(new Date().getTime());
+	}
 	
 }

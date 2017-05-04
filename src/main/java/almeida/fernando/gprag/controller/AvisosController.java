@@ -27,5 +27,14 @@ public class AvisosController {
 	public List<Cliente> findClientsToExpire(){
 		return clienteService.findClientsToExpire();
 	}
+	
+	/**
+	 * Encontra os clientes já foram espirados(periodoNEcessidade anterior à data atual)
+	 */
+	@RequestMapping(value="/findExpiredClients", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Cliente> findExpiredClients(){
+		return clienteService.findExpiredClients();
+	}
 
 }
