@@ -44,19 +44,40 @@ public class ClienteService{
 		clienteRepository.delete(id);
 	}
 
+	/**
+	 * Encontra os clientes que estão para expirar das 00:00 do dia atual às 00:00 com a diferença de uma semana.
+	 * @return
+	 */
 	@Transactional
 	public List<Cliente> findClientsToExpire() {
-		int noOfDays = 7; 
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());            
-		calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
 		
-		return clienteRepository.findByPeriodoNecessidade(new Date().getTime(), calendar.getTime().getTime());
+		Calendar actualDate = Calendar.getInstance();
+		actualDate.setTime(new Date());
+		actualDate.set(Calendar.HOUR_OF_DAY, 0);
+		actualDate.set(Calendar.MINUTE, 0);
+		actualDate.set(Calendar.SECOND, 0);
+
+		Calendar futureDate = (Calendar)actualDate.clone();
+		futureDate.add(Calendar.DAY_OF_YEAR, 7);
+		
+		return clienteRepository.findByPeriodoNecessidade(actualDate.getTime().getTime(), futureDate.getTime().getTime());
 	}
 
 	@Transactional
 	public List<Cliente> findExpiredClients() {
-		return clienteRepository.findExpiredClients(new Date().getTime());
+		
+		Calendar actualDate = Calendar.getInstance();
+		actualDate.setTime(new Date());
+		actualDate.set(Calendar.HOUR_OF_DAY, 0);
+		actualDate.set(Calendar.MINUTE, 0);
+		actualDate.set(Calendar.SECOND, 0);
+
+		return clienteRepository.findExpiredClients(actualDate.getTime().getTime());
 	}
-	
+
+	@Transactional
+	public Cliente findClienteUnique(String clienteId) {
+		return clienteRepository.findOne(clienteId);
+	}
+
 }

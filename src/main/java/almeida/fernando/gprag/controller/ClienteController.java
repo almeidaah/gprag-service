@@ -1,5 +1,7 @@
 package almeida.fernando.gprag.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -84,5 +86,26 @@ public class ClienteController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
+	/**
+	 * Atualiza o periodo de necessidade de um cliente
+	 */
+
+	@RequestMapping(value="/atualizarPeriodoCliente/{clienteId}", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> atualizarPeriodoCliente(@PathVariable String clienteId, @RequestParam Integer meses){
+		
+		Cliente cliente = clienteService.findClienteUnique(clienteId);
+		if(cliente != null){
+			
+			Calendar clientDate = Calendar.getInstance();
+			clientDate.setTime(new Date(cliente.getPeriodoNecessidade()));
+			clientDate.add(Calendar.MONTH, meses);
+			cliente.setPeriodoNecessidade(clientDate.getTime().getTime());
+			
+			clienteService.saveOrUpdate(cliente);
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 	
 }
