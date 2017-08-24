@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.sessionManagement().maximumSessions(1);
 		http.authorizeRequests()
 		
-		.antMatchers("/fitme/v1/**").permitAll()
+		.antMatchers("/gprag/v1/**").permitAll()
 		.anyRequest().authenticated()
 		.and().httpBasic();
 		
