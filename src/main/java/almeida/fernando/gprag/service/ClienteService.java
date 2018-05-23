@@ -1,5 +1,11 @@
 package almeida.fernando.gprag.service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalField;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,29 +56,14 @@ public class ClienteService{
 	 */
 	@Transactional
 	public List<Cliente> findClientsToExpire() {
-		
-		Calendar actualDate = Calendar.getInstance();
-		actualDate.setTime(new Date());
-		actualDate.set(Calendar.HOUR_OF_DAY, 0);
-		actualDate.set(Calendar.MINUTE, 0);
-		actualDate.set(Calendar.SECOND, 0);
-
-		Calendar futureDate = (Calendar)actualDate.clone();
-		futureDate.add(Calendar.DAY_OF_YEAR, 7);
-		
-		return clienteRepository.findByPeriodoNecessidade(actualDate.getTime().getTime(), futureDate.getTime().getTime());
+		Instant now = Instant.now();
+		Instant future = now.plus(7, ChronoUnit.DAYS);
+		return clienteRepository.findByPeriodoNecessidade(now.toEpochMilli(), future.toEpochMilli());
 	}
 
 	@Transactional
 	public List<Cliente> findExpiredClients() {
-		
-		Calendar actualDate = Calendar.getInstance();
-		actualDate.setTime(new Date());
-		actualDate.set(Calendar.HOUR_OF_DAY, 0);
-		actualDate.set(Calendar.MINUTE, 0);
-		actualDate.set(Calendar.SECOND, 0);
-
-		return clienteRepository.findExpiredClients(actualDate.getTime().getTime());
+		return clienteRepository.findExpiredClients(Instant.now().toEpochMilli());
 	}
 
 	@Transactional
